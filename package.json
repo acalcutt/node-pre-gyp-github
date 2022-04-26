@@ -1,5 +1,5 @@
 {
-  "name": "node-pre-gyp-github",
+  "name": "@acalcutt/node-pre-gyp-github",
   "version": "1.4.4",
   "description": "A node-pre-gyp module which provides the ability to publish to GitHub releases.",
   "bin": "./bin/node-pre-gyp-github.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bchr02/node-pre-gyp-github.git"
+    "url": "git+https://github.com/acalcutt/node-pre-gyp-github.git"
   },
   "files": [
     "bin",
