@@ -67,7 +67,7 @@ module.exports = class NodePreGypGithub {
             repo: this.repo,
             tag_name: this.package_json.version,
             target_commitish: 'main',
-            name: 'v' + this.package_json.version,
+            name: 'node-v' + this.package_json.version,
             body: this.package_json.name + ' ' + this.package_json.version,
             draft: true,
             prerelease: false
