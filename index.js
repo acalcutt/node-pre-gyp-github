@@ -61,6 +61,8 @@ module.exports = class NodePreGypGithub {
     }
 
     async createRelease(args) {
+        const prerelease = this.package_json.version.includes('pre');
+
         const options = {
             host: this.host,
             owner: this.owner,
@@ -70,7 +72,7 @@ module.exports = class NodePreGypGithub {
             name: 'node-v' + this.package_json.version,
             body: this.package_json.name + ' ' + this.package_json.version,
             draft: true,
-            prerelease: false
+            prerelease: prerelease
         };
 
         Object.keys(args).forEach(function(key) {
