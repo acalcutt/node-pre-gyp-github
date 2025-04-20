@@ -45,7 +45,7 @@
   "author": "Bill Christo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bchr02/node-pre-gyp-github/issues"
+    "url": "https://github.com/acalcutt/node-pre-gyp-github/issues"
   },
-  "homepage": "https://github.com/bchr02/node-pre-gyp-github#readme"
+  "homepage": "https://github.com/acalcutt/node-pre-gyp-github#readme"
 }
