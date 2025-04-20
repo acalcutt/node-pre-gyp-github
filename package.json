@@ -37,7 +37,7 @@
   "devDependencies": {
     "c8": "^9.1.0",
     "chai": "5.2.0",
-    "chai-as-promised": "7.1.2",
+    "chai-as-promised": "8.0.1",
     "coveralls-next": "^4.2.1",
     "mocha": "10.4.0",
     "sinon": "13.0.1"
