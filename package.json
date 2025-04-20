@@ -4,7 +4,7 @@
   "description": "A node-pre-gyp module which provides the ability to publish to GitHub releases.",
   "bin": "./bin/node-pre-gyp-github.js",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "c8 --reporter=lcov --reporter=text mocha",
     "coverage": "c8 --reporter=text-lcov mocha | coveralls",
