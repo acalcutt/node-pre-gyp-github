@@ -40,7 +40,7 @@ jobs:
     needs: release-check
     if: ${{ needs.release-check.outputs.published == 'false' }}
     name: 'Build, Test, Publish'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       PACKAGE_VERSION: ${{ needs.release-check.outputs.version }}
     steps:
