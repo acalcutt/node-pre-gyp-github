@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const NodePreGypGithub = require('../index.js');
-const { program } = require("commander");
+import NodePreGypGithub from '../index.js';
+import { program } from "commander";
 
 program
   .command("publish")
@@ -22,4 +22,4 @@ program
     }
   });
 
-program.parseAsync(process.argv);
+await program.parseAsync(process.argv);
