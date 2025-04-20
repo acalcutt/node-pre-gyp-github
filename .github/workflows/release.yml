@@ -1,0 +1,82 @@
+name: 'Build, Test, Release'
+
+on:
+  workflow_dispatch:
+    inputs:
+      npm_token:
+        description: 'NPM Token'
+        required: true
+
+jobs:
+  release-check:
+    name: Check if version is published
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          check-latest: true
+          cache: 'npm'
+
+      - name: Check if version is published
+        id: check
+        run: |
+          currentVersion="$( node -e "console.log(require('./package.json').version)" )"
+          isPublished="$( npm view @acalcutt/node-pre-gyp-github versions --json | jq -c --arg cv "$currentVersion" 'any(. == $cv)' )"
+          echo "version=$currentVersion" >> "$GITHUB_OUTPUT"
+          echo "published=$isPublished" >> "$GITHUB_OUTPUT"
+          echo "currentVersion: $currentVersion"
+          echo "isPublished: $isPublished"
+    outputs:
+      published: ${{ steps.check.outputs.published }}
+      version: ${{ steps.check.outputs.version }}
+
+  release:
+    needs: release-check
+    if: ${{ needs.release-check.outputs.published == 'false' }}
+    name: 'Build, Test, Publish'
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_VERSION: ${{ needs.release-check.outputs.version }}
+    steps:
+      - name: Check out repository ✨
+        uses: actions/checkout@v4
+
+      - name: Update apt-get 🚀
+        run: sudo apt-get update -qq
+
+      - name: Setup node env 📦
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          check-latest: true
+          cache: 'npm'
+
+      - name: Install npm dependencies 🚀
+        run: npm ci
+
+      - name: Run tests 🧪
+        run: npm test
+
+      - name: Get release type
+        id: prepare_release
+        run: |
+          RELEASE_TYPE="$(node -e "console.log(require('semver').prerelease('${{ needs.release-check.outputs.version }}') ? 'prerelease' : 'regular')")"
+          if [[ $RELEASE_TYPE == 'regular' ]]; then
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to NPM
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm publish --access public --tag ${{ steps.prepare_release.outputs.prerelease == 'true' && 'next' || 'latest' }}
+        env:
+          NPM_TOKEN: ${{ github.event.inputs.npm_token }}
+

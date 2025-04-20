@@ -1,10 +1,10 @@
 {
   "name": "@acalcutt/node-pre-gyp-github",
-  "version": "2.0.0",
+  "version": "2.0.1-pre.0",
   "description": "A node-pre-gyp module which provides the ability to publish to GitHub releases.",
   "bin": "./bin/node-pre-gyp-github.js",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "c8 --reporter=lcov --reporter=text mocha",
     "coverage": "c8 --reporter=text-lcov mocha | coveralls",
@@ -31,7 +31,7 @@
     "releases"
   ],
   "dependencies": {
-    "@octokit/rest": "20.1.1",
+    "@octokit/rest": "21.1.1",
     "commander": "13.1.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
   "author": "Bill Christo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bchr02/node-pre-gyp-github/issues"
+    "url": "https://github.com/acalcutt/node-pre-gyp-github/issues"
   },
-  "homepage": "https://github.com/bchr02/node-pre-gyp-github#readme"
+  "homepage": "https://github.com/acalcutt/node-pre-gyp-github#readme"
 }
