@@ -13,8 +13,11 @@ Instead of ```node-pre-gyp publish``` use **```node-pre-gyp-github publish```**
 
 * --silent : Turns verbose messages off.
 * --release : Publish the GitHub Release immediately instead of creating a Draft.
-
   For Ex. ```node-pre-gyp-github publish --release```
+* --commitish : Defines the branch to be used for the target_commitish parameter. Defaults to 'master' if omitted.
+  For Ex. ```node-pre-gyp-github publish --commitish main ```
+
+
 
 ## Install
 
