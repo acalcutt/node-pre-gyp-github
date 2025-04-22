@@ -15,7 +15,7 @@ Instead of ```node-pre-gyp publish``` use **```node-pre-gyp-github publish```**
 * --release : Publish the GitHub Release immediately instead of creating a Draft.
   For Ex. ```node-pre-gyp-github publish --release```
 * --commitish : Defines the branch to be used for the target_commitish parameter. Defaults to 'main' if omitted.
-  For Ex. ```node-pre-gyp-github publish --commitish main ```
+  For Ex. ```node-pre-gyp-github publish --commitish master ```
 
 
 
