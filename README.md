@@ -22,9 +22,9 @@ Instead of ```node-pre-gyp publish``` use **```node-pre-gyp-github publish```**
 ## Install
 
 ```bash
-npm install -g node-pre-gyp-github
+npm install -g @acalcutt/node-pre-gyp-github
 # or
-yarn global add node-pre-gyp-github
+yarn global add @acalcutt/node-pre-gyp-github
 
 ```
 
