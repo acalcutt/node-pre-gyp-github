@@ -33,7 +33,7 @@
   "dependencies": {
     "@octokit/rest": "21.1.1",
     "commander": "13.1.0",
-    "semver": "^7.6.3"
+    "semver": "^7.7.2"
   },
   "devDependencies": {
     "c8": "^10.1.3",
