@@ -40,7 +40,7 @@
     "chai": "5.2.0",
     "chai-as-promised": "8.0.1",
     "coveralls-next": "^4.2.1",
-    "mocha": "11.7.0",
+    "mocha": "11.7.1",
     "sinon": "21.0.0"
   },
   "author": "Bill Christo",
