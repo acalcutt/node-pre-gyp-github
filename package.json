@@ -39,7 +39,7 @@
     "c8": "^10.1.3",
     "chai": "6.2.1",
     "chai-as-promised": "8.0.2",
-    "coveralls-next": "^6.0.0",
+    "coveralls-next": "^6.0.1",
     "mocha": "11.7.5",
     "sinon": "21.0.0"
   },
