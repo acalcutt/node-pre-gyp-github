@@ -1,11 +1,11 @@
 name: 'Build, Test, Release'
 
+permissions:
+  id-token: write  # Required for NPM trusted publishing
+  contents: write
+
 on:
   workflow_dispatch:
-    inputs:
-      npm_token:
-        description: 'NPM Token'
-        required: true
 
 jobs:
   release-check:
@@ -26,8 +26,9 @@ jobs:
       - name: Check if version is published
         id: check
         run: |
+          packageName="$( node -e "console.log(require('./package.json').name)" )"
           currentVersion="$( node -e "console.log(require('./package.json').version)" )"
-          isPublished="$( npm view @acalcutt/node-pre-gyp-github versions --json | jq -c --arg cv "$currentVersion" 'any(. == $cv)' )"
+          isPublished="$( npm view "$packageName" versions --json | jq -c --arg cv "$currentVersion" 'any(. == $cv)' )"
           echo "version=$currentVersion" >> "$GITHUB_OUTPUT"
           echo "published=$isPublished" >> "$GITHUB_OUTPUT"
           echo "currentVersion: $currentVersion"
@@ -41,6 +42,7 @@ jobs:
     if: ${{ needs.release-check.outputs.published == 'false' }}
     name: 'Build, Test, Publish'
     runs-on: ubuntu-latest
+    environment: release
     env:
       PACKAGE_VERSION: ${{ needs.release-check.outputs.version }}
     steps:
@@ -56,6 +58,7 @@ jobs:
           node-version-file: 'package.json'
           check-latest: true
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install npm dependencies 🚀
         run: npm ci
@@ -75,8 +78,5 @@ jobs:
 
       - name: Publish to NPM
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm publish --access public --tag ${{ steps.prepare_release.outputs.prerelease == 'true' && 'next' || 'latest' }}
-        env:
-          NPM_TOKEN: ${{ github.event.inputs.npm_token }}
 
