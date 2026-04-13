@@ -41,7 +41,7 @@
     "chai-as-promised": "8.0.2",
     "coveralls-next": "^6.0.1",
     "mocha": "11.7.5",
-    "sinon": "21.1.0"
+    "sinon": "21.1.2"
   },
   "author": "Bill Christo",
   "license": "MIT",
