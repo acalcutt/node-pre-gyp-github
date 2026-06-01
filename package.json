@@ -43,6 +43,9 @@
     "mocha": "11.7.6",
     "sinon": "22.0.0"
   },
+  "overrides": {
+    "yargs": "18.0.0"
+  },
   "author": "Bill Christo",
   "license": "MIT",
   "bugs": {
